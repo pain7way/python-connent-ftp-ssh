@@ -8,10 +8,10 @@ from time import strftime
 def ls(path):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(hostname='10.199.207.5', 
-                port=22, 
-                username='jqr', 
-                password='Jqr@123')    
+    ssh.connect(hostname='ip地址', 
+                port='端口', 
+                username='用户名', 
+                password='密码')    
     stdin, stdout, stderr = ssh.exec_command('ls '+path)
     b = stdout.read()
     a = bytes.decode(b)
@@ -29,22 +29,12 @@ def scp_download(path):
         sftp.get(remotepath='/hdfsftp/DM/JQR/PLAZA/'+path+'/'+n, 
                  localpath='/home/appuser/plaza_match/gc/'+n)
 
-
 def scp_upload(path):
     transport = paramiko.Transport(('10.199.207.5', 22))
     transport.connect(username='jqr', password='Jqr@123' )
     sftp = paramiko.SFTPClient.from_transport(transport)
     sftp.put(localpath='/home/appuser/plaza_match/Plaza_Match.csv', 
              remotepath='/hdfsftp/DM/JQR/PLAZA/'+path+'/Plaza_Match.csv')
-
-
-
-#today = datetime.datetime.today()
-#today = today.strftime('%Y%m%d')
-#yesterday = today - datetime.timedelta(days = 1)
-#today = '20180228'
-
-
 
 while True:
     a = ls('PLAZA/')
@@ -65,6 +55,4 @@ while True:
             time.sleep(600)
     else:
         time.sleep(3600)
-
-
 
