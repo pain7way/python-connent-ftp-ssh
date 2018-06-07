@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# python2.7
 from ftplib import FTP
 import ftplib
 import os
@@ -8,10 +9,10 @@ from time import strftime
 
 class Fuzzy_Match(object):
     def __init__(self):
-        self.ip = '10.199.148.146'
-        self.port = 60621
-        self.user = 'appjqr'
-        self.password = 'eWgLBpxmU6V6'
+        self.ip = 'ip地址'
+        self.port = '端口'
+        self.user = '用户名'
+        self.password = '密码'
         self.bufsize = 1024
         self.ftp = FTP()
 
@@ -45,8 +46,6 @@ class Fuzzy_Match(object):
         file_handle.close()
 
 if __name__ == '__main__':
-    #fm = Fuzzy_Match()
-    #fm.ftp_connect()
     while True:
         fm = Fuzzy_Match()
         fm.ftp_connect()
