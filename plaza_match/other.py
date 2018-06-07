@@ -6,15 +6,14 @@ import os
 
 class test(object):
     def __init__(self):   
-        self.ip = '10.199.148.146'
-        self.port = 60621
-        self.user = 'appjqr'
-        self.password = 'eWgLBpxmU6V6'
+        self.ip = 'ip地址'
+        self.port = '端口'
+        self.user = '用户名'
+        self.password = '密码'
         self.bufsize = 1024
         self.ftp = ftplib.FTP()
         #self.ftp.cwd('/PLAZA/')
         self.ftp.encoding = 'utf8'
-
 
     def ftp_connect(self):
         try:
@@ -25,11 +24,11 @@ class test(object):
         except ftplib.error_perm:
             time.sleep(1)
             self.ftp_connect()
-    
+
     def ls(self, path='/PLAZA/'):
         self.ftp.cwd(path)
         return self.ftp.dir()
-    
+
     def ftp_delete(self, name):
         self.ftp.delete(name)
         print name+u' -- 已经删除'
@@ -42,7 +41,7 @@ class test(object):
             self.ftp.retrbinary('RETR '+i, file_handle.write, self.bufsize)
             file_handle.close()
         self.ftp.cwd('/')
-    
+
     def run(self):
         os.system('python /home/appuser/plaza_match/plaza_match.py')
 
@@ -51,12 +50,6 @@ class test(object):
         file_handle = open('/home/appuser/plaza_match/Plaza_Match.csv',"rb")
         self.ftp.storbinary('STOR '+'Plaza_Match_'+path+'.csv', file_handle, self.bufsize)
         file_handle.close()
-
-
-
-
-
-
 
 if __name__=='__main__':
     t = test()
